@@ -103,7 +103,7 @@ with chat_col:
         else:
             with st.chat_message("assistant", avatar="🫶"):
                 level = entry.get("level", "green")
-                badge_label = {"green": "🟢 GREEN", "yellow": "🟡 YELLOW", "red": "🔴 RED"}[level]
+                badge_label = {"green": "🟢 ירוק", "yellow": "🟡 צהוב", "red": "🔴 אדום"}[level]
                 st.markdown(f'<span class="badge-{level}">{badge_label}</span>', unsafe_allow_html=True)
                 st.markdown(f'<div class="rtl">{entry["content"]}</div>', unsafe_allow_html=True)
 

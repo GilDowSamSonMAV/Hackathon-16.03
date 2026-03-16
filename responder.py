@@ -1,5 +1,4 @@
-import os
-from groq import Groq
+from config import get_client, MODEL
 
 SYSTEM_PROMPT = """את סבתא בוט — בוט וואטסאפ שמתנהג כמו נכדה חמה ואוהבת שמטפלת בקשישים.
 
@@ -71,10 +70,10 @@ def respond(message: str, classification: dict) -> str:
             "כתבי תגובה מתאימה בוואטסאפ."
         )
 
-        client = Groq(api_key=os.environ["GROQ_API_KEY"])
+        client = get_client()
 
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=MODEL,
             max_tokens=128,
             messages=[
                 {
@@ -91,7 +90,7 @@ def respond(message: str, classification: dict) -> str:
         return response.choices[0].message.content.strip()
 
     except KeyError:
-        return "GROQ_API_KEY לא מוגדר — לא ניתן לשלוח תגובה"
+        return "שגיאת חיבור ל-LLM — לא ניתן לשלוח תגובה"
     except Exception:
         return fallback
 

@@ -1,23 +1,16 @@
-import os
 import sys
 import json
 import re
 from datetime import datetime, timezone
-from groq import Groq
-from openai import OpenAI
+
+from config import get_client, MODEL
 
 
 def _create_completion(system_prompt: str, user_content: str, max_tokens: int = 256):
-    """Create a chat completion using Ollama (local) or Groq (cloud)."""
-    if os.environ.get("USE_OLLAMA"):
-        client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
-        model = os.environ.get("OLLAMA_MODEL", "mistral")
-    else:
-        client = Groq(api_key=os.environ["GROQ_API_KEY"])
-        model = "llama-3.3-70b-versatile"
-
+    """Create a chat completion using local Ollama."""
+    client = get_client()
     response = client.chat.completions.create(
-        model=model,
+        model=MODEL,
         max_tokens=max_tokens,
         messages=[
             {"role": "system", "content": system_prompt},

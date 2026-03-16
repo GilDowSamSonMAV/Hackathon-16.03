@@ -7,7 +7,7 @@ from config import PATIENT_NAME, PATIENT_ID
 # ─── Page Config ───
 st.set_page_config(
     page_title="Savta — Smart Check-in",
-    page_icon="🫶",
+    page_icon="👵",
     layout="wide",
 )
 
@@ -90,7 +90,7 @@ with alert_col:
 with chat_col:
     st.markdown("""
     <div class="main-header">
-        <h1>🫶 Savta — סבתא</h1>
+        <h1>👵 Savta — סבתא</h1>
         <p>מערכת צ'ק-אין חכמה למבוגרים</p>
     </div>
     """, unsafe_allow_html=True)
@@ -101,7 +101,7 @@ with chat_col:
             with st.chat_message("user"):
                 st.markdown(f'<div class="rtl">{entry["content"]}</div>', unsafe_allow_html=True)
         else:
-            with st.chat_message("assistant", avatar="🫶"):
+            with st.chat_message("assistant", avatar="👵"):
                 level = entry.get("level", "green")
                 badge_label = {"green": "🟢 GREEN", "yellow": "🟡 YELLOW", "red": "🔴 RED"}[level]
                 st.markdown(f'<span class="badge-{level}">{badge_label}</span>', unsafe_allow_html=True)
@@ -115,7 +115,7 @@ with chat_col:
             st.markdown(f'<div class="rtl">{user_input}</div>', unsafe_allow_html=True)
 
         # Process
-        with st.chat_message("assistant", avatar="🫶"):
+        with st.chat_message("assistant", avatar="👵"):
             with st.spinner("מעבד... 🔄"):
                 classification = classify(user_input)
                 bot_reply = respond(user_input, classification)
